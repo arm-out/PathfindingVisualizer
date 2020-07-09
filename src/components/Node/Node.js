@@ -8,9 +8,9 @@ export class Node extends React.Component {
             isFinish,
             isStart,
             isWall,
-            // onMouseDown,
-            // onMouseEnter,
-            // onMouseUp,
+            onMouseDown,
+            onMouseEnter,
+            onMouseUp,
             row,
         } = this.props;
 
@@ -26,6 +26,9 @@ export class Node extends React.Component {
             <div
                 id={`node-${row}-${col}`}
                 className={`node ${extraClassName}`}
+                onMouseDown={() => onMouseDown(row, col)}
+                onMouseEnter={() => onMouseEnter(row, col)}
+                onMouseUp={() => onMouseUp()}
             ></div>
         );
     }

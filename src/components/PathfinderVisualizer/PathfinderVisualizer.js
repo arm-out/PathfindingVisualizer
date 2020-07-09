@@ -14,9 +14,13 @@ export class PathfinderVisualizer extends React.Component {
         super(props);
         this.state = {
             grid: [],
+            mousePressed: false,
         };
 
         this.initializeGrid = this.initializeGrid.bind(this);
+        this.handleMouseDown = this.handleMouseDown.bind(this);
+        this.handleMouseEnter = this.handleMouseEnter.bind(this);
+        this.handleMouseUp = this.handleMouseUp.bind(this);
     }
 
     initializeGrid() {
@@ -37,9 +41,29 @@ export class PathfinderVisualizer extends React.Component {
         this.initializeGrid();
     }
 
+    handleMouseDown(row, col) {
+        const newGrid = getToggledWallGrid(this.state.grid, row, col);
+        this.setState({
+            grid: newGrid,
+            mousePressed: true,
+        });
+    }
+
+    handleMouseUp() {
+        this.setState({ mousePressed: false });
+    }
+
+    handleMouseEnter(row, col) {
+        if (!this.state.mousePressed) {
+            return;
+        }
+        const newGrid = getToggledWallGrid(this.state.grid, row, col);
+        this.setState({ grid: newGrid });
+    }
+
     render() {
         console.log(this.state.grid);
-        const { grid } = this.state;
+        const { grid, mousePressed } = this.state;
         return (
             <div className='grid'>
                 {grid.map((row, rowIndex) => {
@@ -56,10 +80,19 @@ export class PathfinderVisualizer extends React.Component {
                                 return (
                                     <Node
                                         key={nodeIndex}
+                                        row={row}
                                         col={col}
                                         isWall={isWall}
                                         isStart={isStart}
                                         isFinish={isFinish}
+                                        mousePressed={mousePressed}
+                                        onMouseDown={(row, col) =>
+                                            this.handleMouseDown(row, col)
+                                        }
+                                        onMouseEnter={(row, col) =>
+                                            this.handleMouseEnter(row, col)
+                                        }
+                                        onMouseUp={this.handleMouseUp}
                                     />
                                 );
                             })}
@@ -82,4 +115,16 @@ function createNode(row, col) {
         isWall: false,
         previousNode: null,
     };
+}
+
+function getToggledWallGrid(grid, row, col) {
+    const newGrid = grid.slice();
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isWall: !node.isWall,
+    };
+
+    newGrid[row][col] = newNode;
+    return newGrid;
 }
