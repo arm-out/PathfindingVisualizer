@@ -1,0 +1,28 @@
+.header {
+    overflow: hidden;
+    background-color: #2578b3;
+    padding: 10px 10px;
+}
+
+.header h1 {
+    float: left;
+    color: white;
+    font-weight: bold;
+    font-size: 19pt;
+}
+
+.header img {
+    float: right;
+    height: 25px;
+    width: 25px;
+}
+
+.header img:hover {
+    cursor: pointer;
+}
+
+.by-line {
+    font-weight: normal;
+    font-size: 15pt;
+    padding-left: 10px;
+}

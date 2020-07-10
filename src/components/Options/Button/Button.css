@@ -1,0 +1,31 @@
+.button {
+    font-size: 12pt;
+    background-color: white;
+    border: none;
+    color: rgb(7, 8, 65);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 10px;
+    outline: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #c4e3f8;
+    border-radius: 4px;
+}
+
+.active {
+    background-color: #29a6ff;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 10px;
+}
+
+.active:hover {
+    background-color: #29a6ff;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 10px;
+}

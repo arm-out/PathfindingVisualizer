@@ -1,8 +1,9 @@
 import React from "react";
 import { Node } from "../Node/Node";
+import "./PathfinderVisualizer.css";
 
-const numRows = 20;
-const numCols = 50;
+const numRows = 22;
+const numCols = 55;
 
 const START_COL = 5;
 const START_ROW = 10;
@@ -65,40 +66,42 @@ export class PathfinderVisualizer extends React.Component {
         console.log(this.state.grid);
         const { grid, mousePressed } = this.state;
         return (
-            <div className='grid'>
-                {grid.map((row, rowIndex) => {
-                    return (
-                        <div key={rowIndex}>
-                            {row.map((node, nodeIndex) => {
-                                const {
-                                    row,
-                                    col,
-                                    isWall,
-                                    isStart,
-                                    isFinish,
-                                } = node;
-                                return (
-                                    <Node
-                                        key={nodeIndex}
-                                        row={row}
-                                        col={col}
-                                        isWall={isWall}
-                                        isStart={isStart}
-                                        isFinish={isFinish}
-                                        mousePressed={mousePressed}
-                                        onMouseDown={(row, col) =>
-                                            this.handleMouseDown(row, col)
-                                        }
-                                        onMouseEnter={(row, col) =>
-                                            this.handleMouseEnter(row, col)
-                                        }
-                                        onMouseUp={this.handleMouseUp}
-                                    />
-                                );
-                            })}
-                        </div>
-                    );
-                })}
+            <div className='grid-container'>
+                <div className='grid'>
+                    {grid.map((row, rowIndex) => {
+                        return (
+                            <div key={rowIndex}>
+                                {row.map((node, nodeIndex) => {
+                                    const {
+                                        row,
+                                        col,
+                                        isWall,
+                                        isStart,
+                                        isFinish,
+                                    } = node;
+                                    return (
+                                        <Node
+                                            key={nodeIndex}
+                                            row={row}
+                                            col={col}
+                                            isWall={isWall}
+                                            isStart={isStart}
+                                            isFinish={isFinish}
+                                            mousePressed={mousePressed}
+                                            onMouseDown={(row, col) =>
+                                                this.handleMouseDown(row, col)
+                                            }
+                                            onMouseEnter={(row, col) =>
+                                                this.handleMouseEnter(row, col)
+                                            }
+                                            onMouseUp={this.handleMouseUp}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }

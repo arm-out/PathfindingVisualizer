@@ -1,0 +1,23 @@
+.toolbar {
+    padding: 15px 10px;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #2578b3;
+}
+
+.algorithms {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+button {
+    font-size: 12pt;
+    background-color: #054b7d;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 10px;
+    outline: none;
+}
