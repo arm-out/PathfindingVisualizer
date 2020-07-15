@@ -25,3 +25,7 @@
 .node-visited {
     background-color: rgb(76, 192, 241);
 }
+
+.node-shortest-path {
+    background-color: yellow;
+}

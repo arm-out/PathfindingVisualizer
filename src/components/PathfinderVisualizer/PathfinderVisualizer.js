@@ -1,6 +1,7 @@
 import React from "react";
 import { Node } from "../Node/Node";
 import "./PathfinderVisualizer.css";
+import { dijkstra, getDijkstraPath } from "../../algorithms/dijkstra";
 
 const numRows = 22;
 const numCols = 55;
@@ -22,6 +23,7 @@ export class PathfinderVisualizer extends React.Component {
         this.handleMouseDown = this.handleMouseDown.bind(this);
         this.handleMouseEnter = this.handleMouseEnter.bind(this);
         this.handleMouseUp = this.handleMouseUp.bind(this);
+        this.visualizeDijkstra = this.visualizeDijkstra.bind(this);
     }
 
     initializeGrid() {
@@ -60,6 +62,43 @@ export class PathfinderVisualizer extends React.Component {
         }
         const newGrid = getToggledWallGrid(this.state.grid, row, col);
         this.setState({ grid: newGrid });
+    }
+
+    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
+        for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+            if (i === visitedNodesInOrder.length) {
+                setTimeout(() => {
+                    this.animateShortestPath(nodesInShortestPathOrder);
+                }, 10 * i);
+                return;
+            }
+            setTimeout(() => {
+                const node = visitedNodesInOrder[i];
+                document.getElementById(
+                    `node-${node.row}-${node.col}`
+                ).className = "node node-visited";
+            }, 10 * i);
+        }
+    }
+
+    animateShortestPath(nodesInShortestPathOrder) {
+        for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+            setTimeout(() => {
+                const node = nodesInShortestPathOrder[i];
+                document.getElementById(
+                    `node-${node.row}-${node.col}`
+                ).className = "node node-shortest-path";
+            }, 50 * i);
+        }
+    }
+
+    visualizeDijkstra() {
+        const { grid } = this.state;
+        const startNode = grid[START_ROW][START_COL];
+        const finishNode = grid[FINISH_ROW][FINISH_COL];
+        const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
+        const nodesInShortestPathOrder = getDijkstraPath(finishNode);
+        this.animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
     }
 
     render() {

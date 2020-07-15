@@ -4,14 +4,20 @@ import { PathfinderVisualizer } from "../PathfinderVisualizer/PathfinderVisualiz
 import { Header } from "../Header/Header";
 import { Options } from "../Options/Options";
 
-function App() {
-    return (
-        <div className='App'>
-            <Header />
-            <Options />
-            <PathfinderVisualizer />
-        </div>
-    );
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className='App'>
+                <Header />
+                <Options />
+                <PathfinderVisualizer />
+            </div>
+        );
+    }
 }
 
 export default App;
